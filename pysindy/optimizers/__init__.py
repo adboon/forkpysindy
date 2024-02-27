@@ -23,6 +23,7 @@ from .sindy_optimizer import SINDyOptimizer
 from .sr3 import SR3
 from .ssr import SSR
 from .stlsq import STLSQ
+from .STLSQ_extreme import STLSQ_extreme
 
 __all__ = [
     "BaseOptimizer",
@@ -30,6 +31,7 @@ __all__ = [
     "SINDyOptimizer",
     "SR3",
     "STLSQ",
+    "STLSQ_extreme",
     "ConstrainedSR3",
     "StableLinearSR3",
     "TrappingSR3",
