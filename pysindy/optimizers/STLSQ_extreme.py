@@ -3,8 +3,9 @@ import warnings
 import numpy as np
 from scipy.linalg import LinAlgWarning
 from sklearn.exceptions import ConvergenceWarning
-from sklearn.linear_model import ridge_regression
 from sklearn.utils.validation import check_is_fitted
+from sklearn.linear_model import ridge_regression
+
 
 from .base import BaseOptimizer
 
@@ -134,6 +135,13 @@ class STLSQ_extreme(BaseOptimizer):
         c[~big_ind] = 0
         return c, big_ind
 
+    def my_custom_loss_func(X_train_scaled, Y_train_scaled):
+        error = 0
+        for i in range(0, len(Y_train_scaled)):
+            error_i = -(abs(Y_train_scaled[i] - X_train_scaled[i]))**(8)
+        error += error_i
+        return error
+    
     def _regress(self, x, y):
         """Perform the ridge regression"""
         kw = self.ridge_kw or {}
@@ -141,7 +149,7 @@ class STLSQ_extreme(BaseOptimizer):
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=LinAlgWarning)
             try:
-                coef = ridge_regression(x**16, y**16, self.alpha, **kw)
+                coef = ridge_regression(x, y, self.alpha, **kw)
             except LinAlgWarning:
                 # increase alpha until warning stops
                 self.alpha = 2 * self.alpha
@@ -212,7 +220,7 @@ class STLSQ_extreme(BaseOptimizer):
 
             self.history_.append(coef)
             if self.verbose:
-                R2 = np.sum((y**8 - np.dot(x, coef.T)**8) ** 2)
+                R2 = np.sum((y - np.dot(x, coef.T)) ** 2)
                 L2 = self.alpha * np.sum(coef**2)
                 L0 = np.count_nonzero(coef)
                 row = [k, R2, L2, L0, R2 + L2]

@@ -28,6 +28,7 @@ except ImportError:
     sindy_pi_flag = False
 from .optimizers import STLSQ
 from .optimizers import STLSQ_extreme
+from .optimizers import sr3_extreme
 from .utils import AxesArray
 from .utils import comprehend_axes
 from .utils import concat_sample_axis

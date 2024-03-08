@@ -54,6 +54,7 @@ from .optimizers import SR3
 from .optimizers import SSR
 from .optimizers import STLSQ
 from .optimizers import STLSQ_extreme
+from .optimizers import sr3_extreme
 from .optimizers import EnsembleOptimizer
 
 

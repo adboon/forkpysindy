@@ -24,6 +24,7 @@ from .sr3 import SR3
 from .ssr import SSR
 from .stlsq import STLSQ
 from .STLSQ_extreme import STLSQ_extreme
+from .sr3_extreme import sr3_extreme
 
 __all__ = [
     "BaseOptimizer",
@@ -32,6 +33,7 @@ __all__ = [
     "SR3",
     "STLSQ",
     "STLSQ_extreme",
+    "sr3_extreme",
     "ConstrainedSR3",
     "StableLinearSR3",
     "TrappingSR3",
